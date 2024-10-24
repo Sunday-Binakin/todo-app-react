@@ -9,7 +9,7 @@ const Todos = () => {
     //2.define a function to get the todos
     const getTodos = async () => {
         //use axios to get todos
-        const response = await axios.get('https://todo-api-w285.onrender.com/todos');
+        const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/todos?limit=0`);
         console.table(response.data);
         //update todos state
         setTodos(response.data);
@@ -17,13 +17,13 @@ const Todos = () => {
     //3.call the function with useEffect
     useEffect(() => {
         getTodos();
-    });
+    }, []);
     return (
         <div>
             <h1>All Todos</h1>
             <div>
-                {todos.map((todo)=>{
-                    return <TodoTile title={todo.title} key={todo._id}/>
+                {todos.map((todo) => {
+                    return <TodoTile title={todo.title} key={todo.id} icon={todo.icon}/>
                 })}
             </div>
             <Link to={'/add'}>Add Todo</Link>

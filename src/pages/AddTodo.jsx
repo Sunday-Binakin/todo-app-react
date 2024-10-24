@@ -11,9 +11,12 @@ const AddTodo = () => {
         //collect form input
         const formData = new FormData(event.target);
         //post data to a todo api
-        await axios.post('https://todo-api-w285.onrender.com/todos', {
-            title: formData.get("todo")
-        });
+        await axios.post(`${import.meta.env.VITE_BASE_URL}/todos`, formData
+            //  {
+            // title: formData.get("todo")
+
+            // }
+        );
         //go to homepage
         navigate('/');
     }
@@ -22,7 +25,8 @@ const AddTodo = () => {
         <div>
             <h1>Add A new Todo</h1>
             <form onSubmit={saveTodo}>
-                <input type="text" placeholder="enter task" required name="todo" />
+                <input type="text" placeholder="enter task" required name="title" />
+                <input type="file" name="icon" required />
                 <button type="submit">Submit</button>
             </form>
         </div>
